@@ -1,0 +1,57 @@
+name: Deploy GoodVPN frontend
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: goodvpn-frontend-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.1'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact dependencies
+        run: bun install --frozen-lockfile
+      - name: Test and build both applications
+        run: |
+          bun run --cwd apps/user test
+          bun run --cwd apps/admin test
+          bun run --cwd apps/user build
+          bun run --cwd apps/admin build
+          python3 scripts/deploy/check-artifact.py
+      - name: Package immutable release
+        run: |
+          mkdir -p release/user release/admin
+          cp -a apps/user/dist/. release/user/
+          cp -a apps/admin/dist/. release/admin/
+          cp scripts/deploy/publish-frontend.py release/
+          tar -czf frontend.tar.gz -C release .
+      - name: Publish with pinned SSH host key
+        env:
+          SSHPASS: ${{ secrets.PPANEL_DEPLOY_PASSWORD }}
+          DEPLOY_HOST: ${{ secrets.PPANEL_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.PPANEL_DEPLOY_USER }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.PPANEL_DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSHPASS" && test -n "$DEPLOY_HOST" && test -n "$DEPLOY_USER"
+          sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          target="$DEPLOY_USER@$DEPLOY_HOST"
+          remote="/tmp/goodvpn-frontend-${GITHUB_SHA}-${GITHUB_RUN_ID}"
+          sshpass -e ssh -o StrictHostKeyChecking=yes "$target" "mkdir -m 700 '$remote'"
+          sshpass -e scp -o StrictHostKeyChecking=yes frontend.tar.gz "$target:$remote/frontend.tar.gz"
+          sshpass -e ssh -o StrictHostKeyChecking=yes "$target" "set -eu; tar -xzf '$remote/frontend.tar.gz' -C '$remote'; python3 '$remote/publish-frontend.py' '$remote' '$GITHUB_SHA'; rm -rf '$remote'"
