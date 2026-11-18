@@ -9,7 +9,7 @@ export const supportedLngs = ["en-US", "zh-CN"];
 export const sharedI18nNamespaces = ["components"];
 
 export const routeI18nNamespaces: Record<string, string[]> = {
-  "/": ["main"],
+  "/": ["home", "home-guide", "home-sales"],
   "/affiliate": ["layout", "affiliate"],
   "/announcement": ["layout", "dashboard"],
   "/auth": ["auth"],

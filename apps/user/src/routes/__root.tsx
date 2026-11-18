@@ -5,7 +5,6 @@ import { Toaster } from "@workspace/ui/components/sonner";
 import { NavigationProgress } from "@workspace/ui/composed/navigation-progress";
 import { TanStackQueryDevtools } from "@workspace/ui/integrations/tanstack-query-devtools";
 import { getCookie } from "@workspace/ui/lib/cookies";
-import { isBrowser } from "@workspace/ui/utils/index";
 import { useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { toast } from "sonner";
@@ -48,11 +47,14 @@ export const Route = createRootRouteWithContext()({
     }, []);
 
     const { site } = common;
-    const title = site.site_name || "Loading...";
-    const description = site.site_desc || "";
+    const title = `${site.site_name} | VPN plans and setup guides`;
+    const description =
+      (site.site_desc && site.site_desc.trim() !== site.site_name
+        ? site.site_desc
+        : "") ||
+      "Compare GoodVPN subscription plans, set up a compatible VPN client, and manage your data usage and subscription in one account.";
     const keywords = site.keywords || "";
-    const logo = site.site_logo || "";
-    const url = isBrowser() ? window.location.href : "";
+    const url = "https://goodvpn.app/";
 
     return (
       <HelmetProvider>
@@ -61,9 +63,6 @@ export const Route = createRootRouteWithContext()({
           <meta content={description} name="description" />
           <meta content={keywords} name="keywords" />
           <link href={url} rel="canonical" />
-          <link href={logo} rel="icon" />
-          <link href={logo} rel="apple-touch-icon" sizes="180x180" />
-          <link href="/site.webmanifest" rel="manifest" />
         </Helmet>
         <NavigationProgress />
         <Outlet />

@@ -1,0 +1,20 @@
+{
+  "category": "GoodVPN · VPN subscriptions",
+  "headline": "Your connection,\nencrypted.",
+  "description": "Encrypt traffic between your device and the VPN server on café, hotel, or travel Wi-Fi. Set up your computer and phone, then see your usage in one place.",
+  "benefitsTitle": "From public Wi-Fi to everyday browsing",
+  "privacyTitle": "Encryption on public Wi-Fi",
+  "privacyBody": "At a café, hotel, or airport, a VPN encrypts traffic between your device and the VPN server.",
+  "routesTitle": "Choose a connection route",
+  "routesBody": "View and switch between the routes included in your subscription in a compatible client. Availability depends on your subscription.",
+  "devicesTitle": "Set up computers and phones",
+  "devicesBody": "Import your subscription into a compatible client using the setup guide. Check data usage and expiration in your account.",
+  "planTitle": "Choose the right VPN plan",
+  "planBody": "Compare pricing, billing periods, data and device limits before you choose.",
+  "selectPlan": "Choose this plan",
+  "accountPlan": "Current subscription",
+  "accountUsage": "Data usage",
+  "accountExpiry": "Expiration date",
+  "privacyLink": "Read the privacy policy",
+  "unavailablePlan": "Currently unavailable"
+}

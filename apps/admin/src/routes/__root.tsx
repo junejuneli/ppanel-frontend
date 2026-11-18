@@ -37,10 +37,9 @@ export const Route = createRootRouteWithContext()({
     }, []);
 
     const { site } = common;
-    const title = site.site_name || "Loading...";
+    const title = site.site_name;
     const description = site.site_desc || "";
     const keywords = site.keywords || "";
-    const logo = site.site_logo || "";
     const url = isBrowser() ? window.location.href : "";
 
     return (
@@ -50,9 +49,6 @@ export const Route = createRootRouteWithContext()({
           <meta content={description} name="description" />
           <meta content={keywords} name="keywords" />
           <link href={url} rel="canonical" />
-          <link href={logo} rel="icon" />
-          <link href={logo} rel="apple-touch-icon" sizes="180x180" />
-          <link href="/site.webmanifest" rel="manifest" />
         </Helmet>
         <NavigationProgress />
         <Outlet />

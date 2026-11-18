@@ -1,82 +1,76 @@
-import { DeferredDotLottie } from "@workspace/ui/composed/lottie";
-import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
+import { Globe2, MonitorSmartphone, ShieldCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export function Stats() {
-  const { t } = useTranslation("main");
-
-  const list = [
+  const { t } = useTranslation("home-sales");
+  const features = [
     {
-      name: t("users", "Users"),
-      description: t("users_description", "Trusted by users worldwide"),
-      icon: (
-        <DeferredDotLottie
-          autoplay
-          className="size-24"
-          loop
-          src="./assets/lotties/users.json"
-        />
-      ),
+      icon: ShieldCheck,
+      title: t("privacyTitle"),
+      description: t("privacyBody"),
+      photo: "/assets/images/goodvpn-public-wifi.webp",
+      height: 661,
     },
     {
-      name: t("servers", "Servers"),
-      description: t(
-        "servers_description",
-        "High-performance servers globally"
-      ),
-      icon: (
-        <DeferredDotLottie
-          autoplay
-          className="size-24"
-          loop
-          src="./assets/lotties/servers.json"
-        />
-      ),
+      icon: Globe2,
+      title: t("routesTitle"),
+      description: t("routesBody"),
+      photo: "/assets/images/goodvpn-route-landscape.webp",
+      height: 870,
     },
     {
-      name: t("locations", "Locations"),
-      description: t("locations_description", "Available in multiple regions"),
-      icon: (
-        <DeferredDotLottie
-          autoplay
-          className="size-24"
-          loop
-          src="./assets/lotties/locations.json"
-        />
-      ),
+      icon: MonitorSmartphone,
+      title: t("devicesTitle"),
+      description: t("devicesBody"),
+      photo: "/assets/images/goodvpn-device-workspace.webp",
+      height: 800,
     },
   ];
+
   return (
-    <motion.section
-      animate={{ opacity: 1, y: 0 }}
-      className="z-10 grid w-full grid-cols-1 divide-y-2 divide-muted rounded-lg sm:grid-cols-3 sm:divide-x-2 sm:divide-y-0"
-      initial={{ opacity: 0, y: 50 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-    >
-      {list.map((item, index) => (
-        <motion.div
-          className="mx-auto flex w-10/12 items-center justify-start px-4 py-4 sm:w-full sm:justify-center sm:py-6"
-          initial={{ opacity: 0, scale: 0.8 }}
-          key={item.name}
-          transition={{ duration: 0.8, delay: index * 0.3, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-        >
-          <div className="flex w-full items-center sm:w-auto">
-            <div className="mr-4 flex h-20 w-20 items-center justify-center rounded-full">
-              {item.icon}
-            </div>
-            <div className="flex flex-col">
-              <p className="font-semibold text-lg">{item.name}</p>
-              <p className="text-muted-foreground text-sm">
-                {item.description}
+    <section aria-labelledby="home-benefits-title">
+      <h2
+        className="mb-7 max-w-3xl text-pretty font-semibold text-3xl tracking-tight sm:mb-9 sm:text-5xl"
+        id="home-benefits-title"
+      >
+        {t("benefitsTitle")}
+      </h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map(({ icon: Icon, title, description, photo, height }) => (
+          <article
+            className="relative isolate flex min-h-72 flex-col justify-end overflow-hidden rounded-3xl bg-[#142d21] p-6 text-white lg:min-h-80"
+            key={title}
+          >
+            <img
+              alt=""
+              className="absolute inset-0 size-full object-cover"
+              decoding="async"
+              height={height}
+              loading="lazy"
+              src={photo}
+              width={1000}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[linear-gradient(0deg,#0d2419_0%,#152d22e8_27%,#1c3b2c82_56%,#163b2a12_95%)]"
+            />
+            <div className="relative">
+              <Icon aria-hidden="true" className="size-5 text-[#b7fbd1]" />
+              <h3 className="mt-3 font-semibold text-xl">{title}</h3>
+              <p className="mt-2 max-w-[34ch] text-sm text-white/85 leading-relaxed">
+                {description}
               </p>
             </div>
-          </div>
-        </motion.div>
-      ))}
-    </motion.section>
+          </article>
+        ))}
+      </div>
+      <Link
+        className="mt-5 inline-flex min-h-10 items-center font-medium text-primary text-sm underline underline-offset-4 hover:opacity-80"
+        to="/privacy-policy"
+      >
+        {t("privacyLink")}
+      </Link>
+    </section>
   );
 }

@@ -7,6 +7,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@workspace/ui/components/tabs";
+import { GoodVPNBrand } from "@workspace/ui/composed/goodvpn-brand";
 import { LanguageSwitch } from "@workspace/ui/composed/language-switch";
 import { DeferredDotLottie } from "@workspace/ui/composed/lottie";
 import { ThemeSwitch } from "@workspace/ui/composed/theme-switch";
@@ -40,10 +41,7 @@ export default function Main() {
         <div className="flex bg-center bg-cover lg:w-1/2 lg:flex-auto">
           <div className="flex w-full flex-col items-center justify-center px-5 py-7 md:px-15 lg:py-15">
             <Link className="mb-0 flex flex-col items-center lg:mb-12" to="/">
-              {site.site_logo && (
-                <img alt="logo" height={48} src={site.site_logo} width={48} />
-              )}
-              <span className="font-semibold text-2xl">{site.site_name}</span>
+              <GoodVPNBrand className="w-48" />
             </Link>
             <DeferredDotLottie
               autoplay

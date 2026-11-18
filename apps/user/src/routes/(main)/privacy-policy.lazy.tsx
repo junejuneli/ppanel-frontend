@@ -6,7 +6,7 @@ import { getCommonSitePrivacy as getPrivacyPolicy } from "@workspace/ui/services
 export const Route = createLazyFileRoute("/(main)/privacy-policy")({
   component: () => {
     const { data = "" } = useQuery({
-      queryKey: ["tos"],
+      queryKey: ["privacy-policy"],
       queryFn: async () => {
         const { data } = await getPrivacyPolicy();
         return data.data?.privacy_policy;

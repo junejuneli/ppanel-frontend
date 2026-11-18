@@ -1,6 +1,7 @@
 "use client";
 
 import { Link, useNavigate } from "@tanstack/react-router";
+import { GoodVPNBrand } from "@workspace/ui/composed/goodvpn-brand";
 import { LanguageSwitch } from "@workspace/ui/composed/language-switch";
 import { DeferredDotLottie } from "@workspace/ui/composed/lottie";
 import { ThemeSwitch } from "@workspace/ui/composed/theme-switch";
@@ -25,13 +26,7 @@ export default function Auth() {
         <div className="flex lg:w-1/2 lg:flex-auto">
           <div className="flex w-full flex-col items-center justify-center px-5 py-4 md:px-14 lg:py-14">
             <Link className="mb-0 flex flex-col items-center lg:mb-12" to="/">
-              <img
-                alt="logo"
-                height={48}
-                src={site.site_logo || "/favicon.svg"}
-                width={48}
-              />
-              <span className="font-semibold text-2xl">{site.site_name}</span>
+              <GoodVPNBrand className="w-48" />
             </Link>
             <DeferredDotLottie
               autoplay

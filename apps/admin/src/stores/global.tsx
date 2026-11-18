@@ -1,3 +1,4 @@
+import { goodVPNBrand } from "@workspace/ui/composed/goodvpn-brand";
 import { getUserCurrent as currentUser } from "@workspace/ui/services/admin/admin";
 import { isBrowser } from "@workspace/ui/utils/index";
 import { create } from "zustand";
@@ -40,9 +41,8 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
   common: {
     site: {
       host: "",
-      site_name: "",
+      ...goodVPNBrand,
       site_desc: "",
-      site_logo: "",
       keywords: "",
       custom_html: "",
       custom_data: "",
@@ -113,6 +113,7 @@ export const useGlobalStore = create<GlobalStore>((set, get) => ({
       common: {
         ...state.common,
         ...common,
+        site: { ...state.common.site, ...common.site, ...goodVPNBrand },
       },
     })),
   setUser: (user) => set({ user }),

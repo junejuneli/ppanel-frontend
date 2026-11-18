@@ -1,0 +1,20 @@
+{
+  "category": "GoodVPN · VPN 订阅服务",
+  "headline": "加密连接，\n安心上网。",
+  "description": "在咖啡馆、酒店或旅途中连上 Wi‑Fi 时，用 GoodVPN 加密设备与 VPN 服务器之间的流量。按指引配置电脑和手机，随时查看用量。",
+  "benefitsTitle": "从公共 Wi‑Fi 到日常连接",
+  "privacyTitle": "公共 Wi‑Fi 上的加密连接",
+  "privacyBody": "在咖啡馆、酒店或机场连网时，VPN 会加密设备与 VPN 服务器之间的流量。",
+  "routesTitle": "按需选择连接线路",
+  "routesBody": "在兼容客户端里查看订阅提供的线路，按需要选择和切换。实际可用线路以订阅为准。",
+  "devicesTitle": "电脑和手机都能配置",
+  "devicesBody": "按设备指引将订阅导入兼容客户端。在账户里随时查看流量用量和到期时间。",
+  "planTitle": "选一个适合你的 VPN 套餐",
+  "planBody": "比较价格、计费周期、流量和设备限制，再决定怎么订。",
+  "selectPlan": "选择这个套餐",
+  "accountPlan": "当前订阅",
+  "accountUsage": "流量用量",
+  "accountExpiry": "到期日期",
+  "privacyLink": "查看隐私政策",
+  "unavailablePlan": "暂不可购买"
+}
