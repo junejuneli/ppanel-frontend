@@ -73,5 +73,14 @@
     "unsubscribe": "Unsubscribe",
     "unsubscribeDescription": "Please note: If you unsubscribe now, the remaining value of the subscription will be refunded to your account balance, which can be used for your next subscription purchase or renewal."
   },
-  "Year": "Year"
+  "Year": "Year",
+  "trialLogin": "Register or sign in to purchase the trial. One purchase per account.",
+  "trialSignIn": "Sign in / Register",
+  "recommended": "Recommended",
+  "trialPurchased": "Trial already purchased",
+  "ipCounting": "Counted by public IP",
+  "billing12": "Annual · Best value",
+  "billing3": "Quarterly",
+  "billing1": "Monthly",
+  "annualUnit": "year"
 }

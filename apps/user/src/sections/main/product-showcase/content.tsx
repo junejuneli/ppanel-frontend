@@ -1,3 +1,5 @@
+import { isRecommended } from "@/utils/plans";
+import { Badge } from "@workspace/ui/components/badge";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -50,11 +52,11 @@ export function Content({ subscriptionData }: ProductShowcaseProps) {
       <div className="mx-auto flex flex-wrap justify-center gap-4 sm:gap-6">
         {subscriptionData.map((item) => (
           <Card
-            className="flex w-full max-w-sm flex-col gap-0 overflow-hidden rounded-2xl border-border/80 bg-card py-0 shadow-sm sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            className={cn("flex w-full max-w-sm flex-col gap-0 overflow-hidden rounded-2xl border-border/80 bg-card py-0 shadow-sm sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]", { "border-primary ring-2 ring-primary": isRecommended(item) })}
             key={item.id}
           >
             <CardHeader className="gap-3 border-border/70 border-b px-6 py-5">
-              <h3 className="font-semibold text-lg">{item.name}</h3>
+              <h3 className="flex items-center justify-between font-semibold text-lg">{item.name} {isRecommended(item) && <Badge>{t("home-sales:recommended", "Recommended")}</Badge>}</h3>
               {(() => {
                 const hasDiscount = item.discount && item.discount.length > 0;
                 const shouldShowOriginal = item.show_original_price !== false;
@@ -81,7 +83,7 @@ export function Content({ subscriptionData }: ProductShowcaseProps) {
                   <p className="font-semibold text-4xl tracking-tight">
                     <Display type="currency" value={displayPrice} />
                     <span className="ml-1 font-medium text-muted-foreground text-sm">
-                      {displayQuantity === 1
+                      {item.unit_time === "Month" && displayQuantity === 12 ? `/${t("annualUnit", "year")}` : displayQuantity === 1
                         ? `/${unitTime}`
                         : `/${displayQuantity} ${unitTime}`}
                     </span>
@@ -162,7 +164,7 @@ export function Content({ subscriptionData }: ProductShowcaseProps) {
                 <Button asChild className="min-h-11 w-full rounded-full">
                   <Link
                     search={user ? undefined : { id: item.id }}
-                    to={user ? "/subscribe" : "/purchasing"}
+                    to={user ? "/subscribe" : item.one_time ? "/auth" : "/purchasing"}
                   >
                     {t("home-sales:selectPlan")}
                   </Link>

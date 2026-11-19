@@ -295,6 +295,7 @@ subscription URL does not carry them, in query-string form such as
     name: string;
     node_tags?: string[];
     nodes?: number[];
+    one_time?: boolean;
     quota?: number;
     renewal_reset?: boolean;
     replacement?: number;
@@ -1711,6 +1712,7 @@ it was recorded. */
     name: string;
     node_tags: string[];
     nodes: number[];
+    one_time?: boolean;
     quota: number;
     renewal_reset: boolean;
     replacement: number;
@@ -1780,6 +1782,7 @@ it was recorded. */
     name: string;
     node_tags: string[];
     nodes: number[];
+    one_time?: boolean;
     quota: number;
     renewal_reset: boolean;
     replacement: number;
@@ -2039,6 +2042,7 @@ it was recorded. */
     name: string;
     node_tags?: string[];
     nodes?: number[];
+    one_time?: boolean;
     quota?: number;
     renewal_reset?: boolean;
     replacement?: number;

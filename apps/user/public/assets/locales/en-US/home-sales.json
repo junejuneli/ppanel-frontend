@@ -16,5 +16,6 @@
   "accountUsage": "Data usage",
   "accountExpiry": "Expiration date",
   "privacyLink": "Read the privacy policy",
-  "unavailablePlan": "Currently unavailable"
+  "unavailablePlan": "Currently unavailable",
+  "recommended": "Recommended"
 }

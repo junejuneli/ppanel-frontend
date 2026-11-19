@@ -29,6 +29,7 @@ import { differenceInDays, formatDate } from "@workspace/ui/utils/formatting";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Display } from "@/components/display";
+import { isRecommended } from "@/utils/plans";
 import { isExpiredSubscription } from "@/utils/subscription";
 import { SubscribeDetail } from "./detail";
 import Purchase from "./purchase";
@@ -77,7 +78,7 @@ export default function Subscribe() {
 
   const allRenewable = (
     userSubscriptions?.filter(
-      (sub) => sub.expire_time !== 0 && sub.subscribe?.sell
+      (sub) => sub.expire_time !== 0 && sub.subscribe?.sell && !sub.subscribe.one_time
     ) ?? []
   ).sort((a, b) => a.expire_time - b.expire_time);
   const matchingRenewable = pendingPlan
@@ -188,9 +189,9 @@ export default function Subscribe() {
         )}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
           {filteredData?.map((item) => (
-            <Card className="relative flex flex-col" key={item.id}>
+            <Card className={cn("relative flex flex-col", { "border-primary ring-1 ring-primary": isRecommended(item) })} key={item.id}>
               <CardHeader className="font-medium text-xl">
-                {item.name}
+                {item.name} {isRecommended(item) && <Badge>{t("recommended", "Recommended")}</Badge>}
               </CardHeader>
               <CardContent className="*:!text-sm flex flex-grow flex-col gap-3">
                 {/* <div className='font-semibold'>{t('productDescription')}</div> */}
@@ -288,7 +289,7 @@ export default function Subscribe() {
                     <h2 className="pb-8 font-semibold text-2xl sm:text-3xl">
                       <Display type="currency" value={displayPrice} />
                       <span className="font-medium text-base">
-                        {displayQuantity === 1
+                        {item.unit_time === "Month" && displayQuantity === 12 ? `/${t("annualUnit", "year")}` : displayQuantity === 1
                           ? `/${unitTime}`
                           : `/${displayQuantity} ${unitTime}`}
                       </span>
@@ -297,6 +298,7 @@ export default function Subscribe() {
                 })()}
                 <Button
                   className="absolute bottom-0 w-full rounded-t-none rounded-b-xl"
+                  disabled={item.one_time && purchasedPlanIds.has(item.id)}
                   onClick={() => {
                     if (
                       allRenewable.some((sub) => sub.subscribe_id === item.id)
@@ -307,7 +309,7 @@ export default function Subscribe() {
                     }
                   }}
                 >
-                  {t("buy", "Buy")}
+                  {item.one_time && purchasedPlanIds.has(item.id) ? t("trialPurchased", "Trial already purchased") : t("buy", "Buy")}
                 </Button>
               </CardFooter>
             </Card>

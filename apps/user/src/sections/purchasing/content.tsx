@@ -28,14 +28,6 @@ export default function Content({
   subscription?: API.Subscribe;
 }) {
   const { t } = useTranslation("subscribe");
-  const unitTimeMap: Record<string, string> = {
-    Day: t("Day", "Day"),
-    Hour: t("Hour", "Hour"),
-    Minute: t("Minute", "Minute"),
-    Month: t("Month", "Month"),
-    NoLimit: t("NoLimit", "No Limit"),
-    Year: t("Year", "Year"),
-  };
   const { common } = useGlobalStore();
   const navigate = useNavigate();
   const [params, setParams] = useState<API.PortalPurchaseRequest>({
@@ -54,7 +46,7 @@ export default function Content({
   });
 
   const { data: order } = useQuery({
-    enabled: !!subscription?.id && !!params.payment,
+    enabled: !!subscription?.id && !subscription.one_time && !!params.payment,
     queryKey: [
       "preCreateOrder",
       params.coupon,
@@ -74,7 +66,7 @@ export default function Content({
     if (subscription) {
       setParams((prev) => ({
         ...prev,
-        quantity: 1,
+        quantity: subscription.show_original_price === false ? (subscription.discount?.[0]?.quantity ?? 1) : 1,
         subscribe_id: subscription?.id,
       }));
     }
@@ -115,6 +107,9 @@ export default function Content({
   const isPasswordInvalid =
     passwordLength > 0 && (passwordLength < 8 || passwordLength > 128);
 
+  if (subscription?.one_time) {
+    return <Card><CardContent className="space-y-4 p-6"><p>{t("trialLogin", "Register or sign in to purchase the one-time trial.")}</p><Button onClick={() => navigate({ to: "/auth" })}>{t("trialSignIn", "Sign in / Register")}</Button></CardContent></Card>;
+  }
   if (!subscription) {
     return (
       <div className="p-6 text-center">
@@ -312,9 +307,8 @@ export default function Content({
                 discounts={subscription?.discount}
                 onChange={(value: number) => handleChange("quantity", value)}
                 quantity={params.quantity!}
-                unitTime={
-                  unitTimeMap[subscription.unit_time!] || subscription.unit_time
-                }
+                unitTime={subscription.unit_time}
+                showOriginalPrice={subscription.show_original_price}
               />
               <CouponInput
                 coupon={params.coupon}

@@ -73,5 +73,14 @@
     "unsubscribe": "取消订阅",
     "unsubscribeDescription": "请注意：如果您现在取消订阅，订阅的剩余价值将退还到您的账户余额中，可用于您下次的订阅购买或续订。"
   },
-  "Year": "年"
+  "Year": "年",
+  "trialLogin": "注册或登录后即可购买试用装，每个账号限购一次。",
+  "trialSignIn": "登录 / 注册",
+  "recommended": "推荐",
+  "trialPurchased": "已购买试用装",
+  "ipCounting": "按公网 IP 计数",
+  "billing12": "年付 · 最划算",
+  "billing3": "季付",
+  "billing1": "月付",
+  "annualUnit": "年"
 }

@@ -25,5 +25,6 @@
   "home_devices": "提供设备配置指引",
   "home_manage": "在线管理订阅",
   "home_connection_title": "订阅和设备配置，一个账户就够。",
-  "home_connection_description": "在账户里查看流量用量和套餐到期时间，也能找到设备配置指引。"
+  "home_connection_description": "在账户里查看流量用量和套餐到期时间，也能找到设备配置指引。",
+  "annualUnit": "年"
 }

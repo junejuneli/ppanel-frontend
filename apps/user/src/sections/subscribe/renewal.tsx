@@ -118,6 +118,8 @@ export default function Renewal({
     });
   }, [params, getUserInfo, navigate]);
 
+  if (subscribe.one_time) return null;
+
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>

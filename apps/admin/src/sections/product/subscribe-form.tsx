@@ -44,6 +44,7 @@ import {
   evaluateWithPrecision,
   unitConversion,
 } from "@workspace/ui/utils/unit-conversions";
+import { speedFromMbps, speedToMbps, type SpeedUnit } from "@workspace/ui/utils/speed-units";
 import { CreditCard, Server, Settings } from "lucide-react";
 import { assign, shake } from "radash";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -68,6 +69,7 @@ const defaultValues = {
   device_limit: 0,
   traffic: 0,
   quota: 0,
+  one_time: false,
   discount: [],
   language: "",
   node_tags: [],
@@ -93,6 +95,7 @@ export default function SubscribeForm<T extends Record<string, any>>({
 
   const { t } = useTranslation("product");
   const [open, setOpen] = useState(false);
+  const [speedUnit, setSpeedUnit] = useState<SpeedUnit>("Mbps");
   const updateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const formSchema = z.object({
@@ -114,6 +117,7 @@ export default function SubscribeForm<T extends Record<string, any>>({
     device_limit: z.number().optional(),
     traffic: z.number().optional(),
     quota: z.number().optional(),
+    one_time: z.boolean().optional(),
     language: z.string().optional(),
     node_tags: z.array(z.string()).optional(),
     nodes: z.array(z.number()).optional(),
@@ -392,21 +396,28 @@ export default function SubscribeForm<T extends Record<string, any>>({
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>{t("form.speedLimit")}</FormLabel>
+                            <select aria-label="限速输入单位" className="rounded-md border bg-background p-1 text-sm" value={speedUnit} onChange={(event) => setSpeedUnit(event.target.value as SpeedUnit)}>
+                              <option value="Mbps">Mbps</option><option value="MB/s">MB/s</option><option value="bit/s">bit/s</option>
+                            </select>
+                            <FormDescription>1 MB/s = 10 Mbps；1 Mbps = 1,000,000 bit/s</FormDescription>
                             <FormControl>
                               <EnhancedInput
                                 placeholder={t("form.noLimit")}
                                 type="number"
                                 {...field}
                                 formatInput={(value) =>
-                                  unitConversion("bitsToMb", value)
+                                  speedFromMbps(Number(value || 0), speedUnit)
                                 }
                                 formatOutput={(value) =>
-                                  unitConversion("mbToBits", value)
+                                  speedToMbps(Number(value || 0), speedUnit)
                                 }
                                 onValueChange={(value) => {
                                   form.setValue(field.name, value);
                                 }}
-                                suffix="Mbps"
+                                key={speedUnit}
+                                min={0}
+                                step="any"
+                                suffix={speedUnit}
                               />
                             </FormControl>
                             <FormMessage />
@@ -482,6 +493,12 @@ export default function SubscribeForm<T extends Record<string, any>>({
                         )}
                       />
                     </div>
+                    <FormField control={form.control} name="one_time" render={({ field }) => (
+                      <FormItem className="flex items-center justify-between rounded-md border p-3">
+                        <div><FormLabel>每账号仅可购买一次</FormLabel><FormDescription>固定体验时长，不支持续费、流量重置或折抵。</FormDescription></div>
+                        <FormControl><Switch checked={field.value} onCheckedChange={field.onChange} /></FormControl>
+                      </FormItem>
+                    )} />
                     <FormField
                       control={form.control}
                       name="description"

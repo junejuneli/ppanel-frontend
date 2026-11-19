@@ -38,7 +38,7 @@ export function Display<T extends number | undefined | null>({
   }
 
   if (type === "trafficSpeed") {
-    return value ? `${formatBytes(value).replace("B", "b")}ps` : "0";
+    return value ? `${value} Mbps` : "0";
   }
 
   if (type === "number") {

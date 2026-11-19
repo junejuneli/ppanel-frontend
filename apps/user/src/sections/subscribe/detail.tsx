@@ -34,7 +34,7 @@ export function SubscribeDetail({ subscribe }: Readonly<SubscribeDetailProps>) {
             {t("detail.availableTraffic", "Available Traffic")}
           </span>
           <span>
-            <Display type="traffic" unlimited value={subscribe?.traffic} />
+            {subscribe?.traffic ? `${(subscribe.traffic / 1024 ** 3).toLocaleString()} GB` : <Display type="traffic" unlimited value={subscribe?.traffic} />}
           </span>
         </li>
         <li>
@@ -52,6 +52,7 @@ export function SubscribeDetail({ subscribe }: Readonly<SubscribeDetailProps>) {
         <li>
           <span className="text-muted-foreground">
             {t("detail.connectedDevices", "Connected Devices")}
+            <span className="block text-xs">{t("ipCounting", "Counted by public IP")}</span>
           </span>
           <span>
             <Display type="number" unlimited value={subscribe?.device_limit} />

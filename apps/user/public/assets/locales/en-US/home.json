@@ -25,5 +25,6 @@
   "home_devices": "Setup guides for your devices",
   "home_manage": "Manage your subscription online",
   "home_connection_title": "One place for your VPN subscription.",
-  "home_connection_description": "From your account, you can find setup guides, check your data usage, and see when your plan renews."
+  "home_connection_description": "From your account, you can find setup guides, check your data usage, and see when your plan renews.",
+  "annualUnit": "year"
 }

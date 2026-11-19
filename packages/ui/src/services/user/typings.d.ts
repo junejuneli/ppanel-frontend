@@ -501,6 +501,7 @@ it was recorded. */
     name: string;
     node_tags: string[];
     nodes: number[];
+    one_time?: boolean;
     quota: number;
     renewal_reset: boolean;
     replacement: number;

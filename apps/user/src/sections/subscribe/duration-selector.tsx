@@ -71,7 +71,9 @@ const DurationSelector: React.FC<DurationSelectorProps> = ({
         {discounts?.map((item) => (
           <DurationOption
             key={item.quantity}
-            label={`${item.quantity} / ${t(unitTime)}`}
+            label={unitTime === "Month" && [12, 3, 1].includes(item.quantity)
+              ? t(`billing${item.quantity}`, item.quantity === 12 ? "Annual" : item.quantity === 3 ? "Quarterly" : "Monthly")
+              : `${item.quantity} / ${t(unitTime)}`}
             value={String(item.quantity)}
           />
         ))}
