@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { paymentIcon } from "@/utils/payment-icons";
 import { Label } from "@workspace/ui/components/label";
 import {
   RadioGroup,
@@ -84,7 +85,7 @@ const PaymentMethods: React.FC<PaymentMethodsProps> = ({
                 <img
                   alt={item.name}
                   height={48}
-                  src={item.icon || "./assets/payment/balance.svg"}
+                  src={paymentIcon(item)}
                   width={48}
                 />
               </div>

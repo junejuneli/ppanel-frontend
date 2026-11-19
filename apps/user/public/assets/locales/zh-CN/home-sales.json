@@ -17,5 +17,25 @@
   "accountExpiry": "到期日期",
   "privacyLink": "查看隐私政策",
   "unavailablePlan": "暂不可购买",
-  "recommended": "推荐"
+  "recommended": "推荐",
+  "comparison": {
+    "title": "价格与权益一览",
+    "daily": "≈ {{price}} / 天",
+    "plan": "套餐",
+    "annual": "年付",
+    "quarterly": "季付",
+    "monthly": "月付",
+    "bestValue": "更划算",
+    "traffic": "流量额度",
+    "speed": "最高速率",
+    "connections": "同时在线",
+    "swipe": "左右滑动查看完整对比",
+    "trialDuration": "{{days}} 天体验",
+    "once": "每账号限购一次",
+    "unlimited": "不限",
+    "totalTraffic": "体验期总流量",
+    "monthlyReset": "每月重置",
+    "ipCounting": "按公网 IP 计数",
+    "note": "日均价仅用于比较：月付按 30 天、季付按 90 天、年付按 365 天，试用装按 3 天折算。套餐按所选周期一次性支付，实际有效期按日历计算；优惠券及支付手续费以结算页为准。"
+  }
 }

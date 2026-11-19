@@ -16,6 +16,8 @@ import { Display } from "@/components/display";
 import { SubscribeDetail } from "@/sections/subscribe/detail";
 import { useGlobalStore } from "@/stores/global";
 
+import { PriceComparison } from "./price-comparison";
+
 interface ProductShowcaseProps {
   subscriptionData: API.Subscribe[];
 }
@@ -174,6 +176,7 @@ export function Content({ subscriptionData }: ProductShowcaseProps) {
           </Card>
         ))}
       </div>
+      <PriceComparison plans={subscriptionData} />
     </section>
   );
 }

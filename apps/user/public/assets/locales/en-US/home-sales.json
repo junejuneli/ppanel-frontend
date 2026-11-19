@@ -17,5 +17,25 @@
   "accountExpiry": "Expiration date",
   "privacyLink": "Read the privacy policy",
   "unavailablePlan": "Currently unavailable",
-  "recommended": "Recommended"
+  "recommended": "Recommended",
+  "comparison": {
+    "title": "Compare prices and benefits",
+    "daily": "≈ {{price}} / day",
+    "plan": "Plan",
+    "annual": "Annual",
+    "quarterly": "Quarterly",
+    "monthly": "Monthly",
+    "bestValue": "Best value",
+    "traffic": "Data allowance",
+    "speed": "Maximum speed",
+    "connections": "Simultaneous connections",
+    "swipe": "Swipe to compare all prices and benefits",
+    "trialDuration": "{{days}} day trial",
+    "once": "One purchase per account",
+    "unlimited": "Unlimited",
+    "totalTraffic": "Total trial allowance",
+    "monthlyReset": "Resets monthly",
+    "ipCounting": "Counted by public IP",
+    "note": "Daily equivalents are for comparison: 30 days per month, 90 days per quarter, 365 days per year, and 3 days for the trial. Plans are paid upfront for the selected period; actual terms follow the calendar. Coupons and payment fees are shown at checkout."
+  }
 }
